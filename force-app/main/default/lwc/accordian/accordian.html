@@ -1,0 +1,24 @@
+<template>
+    <div>
+        <div class="slds-card">
+            <div class="slds-p-around_medium">
+                <lightning-accordion class="example-accordion" onsectiontoggle={handleToggleSection}>
+                    <template for:each={accntConts} for:item="accnt">
+                        <lightning-accordion-section name={accnt.Name} label={accnt.Name} key={accnt.Name}>
+                            <!--  Start of Nested Accordion  -->
+                            <template for:each={accnt.Contacts} for:item="cnt">
+                                <lightning-accordion key={cnt.Name} onsectiontoggle={handleToggleSection}>
+                                    <lightning-accordion-section name={cnt.Name} label={cnt.Name}>
+                                        Contact Name : {cnt.Name}<br/>
+                                        Contact Description : This contact name is {cnt.Name}
+                                    </lightning-accordion-section>
+                                </lightning-accordion>
+                            </template>
+                            <!-- End of Nested Accordion -->
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+            </div>
+        </div>
+    </div>
+</template>

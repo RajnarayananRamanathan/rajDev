@@ -1,0 +1,17 @@
+<aura:component implements='force:hasRecordId,flexipage:availableForAllPageTypes'>
+    
+    <aura:attribute name='recordFields' type="Object"></aura:attribute>
+    <aura:attribute name= 'recordError' type = 'String'></aura:attribute>
+    
+    <force:recordData aura:id="recordLoader"
+                      fields = "Name,Type"
+                      recordId ="{!v.recordId}"                                           
+                      targetFields ="{!v.recordFields}"
+                      targetError = "{!v.recordError}"/>    
+    
+    <lightning:card>        
+        {!v.recordFields.Name}
+        {!v.recordFields.Type}
+        {!v.recordError}
+    </lightning:card>
+</aura:component>

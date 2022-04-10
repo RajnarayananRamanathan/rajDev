@@ -1,0 +1,14 @@
+<aura:component controller="DataTableController" implements="force:hasSObjectname,flexipage:availableForAllPageTypes">
+    <aura:attribute name="data" type="sObject[]"></aura:attribute>
+    <aura:attribute name="fields" type="String"></aura:attribute>    
+    <aura:attribute name="columns" type="List"></aura:attribute>
+    <aura:attribute name="objectName" type="String"></aura:attribute>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <div>
+        <lightning:datatable
+                             keyField="id"
+                             data="{!v.data}"
+                             columns="{!v.columns}"
+                             hideCheckboxColumn="true"/>
+    </div>
+</aura:component>

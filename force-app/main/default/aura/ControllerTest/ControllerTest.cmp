@@ -1,0 +1,13 @@
+<aura:component implements='flexipage:availableForAllPageTypes'>
+    
+    <aura:attribute name="testAtt" type="String"> </aura:attribute>
+    <aura:method name='testMethod' action="{!c.anotherController}"></aura:method>
+    
+    <lightning:card>
+        <lightning:button label='click me' onclick="{!c.getController}"> </lightning:button>
+        
+        {!v.testAtt}
+    </lightning:card>
+    
+    
+</aura:component>

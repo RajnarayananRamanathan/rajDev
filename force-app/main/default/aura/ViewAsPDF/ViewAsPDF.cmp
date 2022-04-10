@@ -1,0 +1,3 @@
+<aura:component implements="force:lightningQuickAction" access="global">
+    <iframe src="{! 'https://rajapersonal18-dev-ed--c.visualforce.com/apex/ViewAsPDF' }" width="100%" height="500px;" frameBorder="0"/>
+</aura:component>

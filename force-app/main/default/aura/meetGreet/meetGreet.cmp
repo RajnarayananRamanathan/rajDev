@@ -1,0 +1,138 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    
+    <aura:attribute name="sobject" type="Object" />
+    <aura:attribute name="dependentOptions" type="Object"/>
+    <aura:attribute name="disabledPick" type="Boolean" default="true"/>
+  
+    <aura:attribute name="MasterId" type="String"/>
+    <aura:attribute name="showErrors" type="Boolean" />
+    <aura:attribute name="errorMessage" type="String"/>
+    <lightning:overlayLibrary aura:id="overlayLibMappingCreate"/>    
+    
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <div class="slds-grid slds-p-top_x-small"> 
+            <div class="slds-notify_container slds-is-relative">
+                <div class="slds-size_2-of-2" >
+                    <aura:if isTrue="{!v.showErrors}">                          
+                        <div class="slds-notify slds-notify_toast slds-theme_error ">
+                            <span class="slds-assistive-text">error</span>                            
+                            <div class="slds-notify__content">                               
+                                <h5 class="slds-text-heading_small">Error Message!!</h5>                            
+                                <p class="slds-align_absolute-center">{!v.errorMessage}</p> 
+                            </div> 
+                            <div class="slds-notify__close">
+                            <lightning:buttonIcon iconName="utility:close" onclick="{! c.handleCloseClick }" size="small" variant="bare-inverse" />
+                        </div>
+                        </div>                        
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+        <lightning:recordEditForm objectApiName="Mapping_Contract__c">            
+            <div class="slds-grid slds-p-top_x-small"> 
+                <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " > 
+                    <span class="required">*</span>
+                    <lightning:inputField  fieldName="Name"  
+                                          value="{!v.conInfo.Name}"
+                                          required="true"/></div>
+                <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " > 
+                    <lightning:inputField fieldName="Target_Connection__c"  
+                                          value="{!v.conInfo.Target_Connection__c}"
+                                          required="true" /></div></div>
+            <div class="slds-grid slds-p-top_x-small"> 
+                <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                    <lightning:inputField  fieldName="Description__c"  
+                                          value="{!v.conInfo.Description__c}"/></div>
+                <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                    <lightning:inputField fieldName="EndPointURL__c" aura:id="url" 
+                                          value="{!v.conInfo.EndPointURL__c}"
+                                          required="true" /></div></div>
+            
+            
+            
+            <div class="slds-grid slds-p-top_x-small"> 
+                <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                    <lightning:select label="Source Object" name="sourcefield"  value="{!v.conInfo.Source_Object__c}"  aura:id="parentpicklist" onchange="{!c.onControllerFieldChange}" required="true">
+                        <option value="">--CHOOSE ONE--</option>
+                        <aura:iteration items="{!v.sobject}" var="result">
+                            <option value="{!result}">{!result}</option>
+                        </aura:iteration>
+                    </lightning:select></div>
+                <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                    <lightning:select label="Contract Type" name="childField" value="{!v.conInfo.Contract_Type__c}" disabled="{!v.disabledPick}" required="true">
+                        <option value="">--NONE--</option>
+                        <aura:iteration items="{!v.dependentOptions}" var="demo">
+                            <option value="{!demo.Name}">{!demo.Name}</option>
+                        </aura:iteration>
+                    </lightning:select></div></div>
+            <div class="slds-m-around--xx-large">
+                <label class="slds-form-element__label">Target Field Set</label>
+                <div class="slds-float_right slds-p-bottom_small">
+                    <h1 class="slds-page-header-title-medium">Add Row 
+                        <lightning:buttonIcon iconName="utility:add"  size="medium" variant="bare" alternativeText="Add" onclick="{!c.addRow}"/>
+                    </h1>
+                </div>
+                
+                <div class="container-fluid">        
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th scope="col">
+                                    <div class="slds-truncate">#</div>
+                                </th>
+                                <th scope="col">
+                                    <span class="required">*</span>
+                                    <div class="slds-truncate" title="Target Table">Target Table</div>
+                                </th>
+                                <th scope="col">
+                                    <span class="required">*</span>
+                                    <div class="slds-truncate" title="Target Field">Target Field</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Description">Description</div>
+                                </th>
+                            </tr>
+                        </thead>   
+                        <tbody>      
+                            <aura:iteration items="{!v.targetList}" var="tar" indexVar="index">
+                                <tr>
+                                    <td> 
+                                        {!index + 1}
+                                    </td>
+                                    <td>
+                                        <lightning:input name="Target Table" type="text"  value="{!tar.Target_Table__c}" variant="label-hidden"/>
+                                    </td>
+                                    <td>
+                                        <lightning:input name="Target Field" type="text"  value="{!tar.Target_Field__c}" variant="label-hidden"/>
+                                    </td>
+                                    <td>
+                                        <lightning:input name="Descripton" type="Text"  value="{!tar.Description__c}" variant="label-hidden"/>
+                                    </td>
+                                    <td>
+                                        <a onclick="{!c.removeRow}" data-record="{!index}">
+                                            <lightning:icon iconName="utility:delete" size="small" alternativeText="Delete"/>
+                                            <span class="slds-assistive-text">Delete</span>
+                                        </a>
+                                    </td> 
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </div>
+    
+    <footer class="slds-modal__footer">
+        <lightning:button variant="neutral" 
+                          label="Cancel"
+                          title="Cancel"
+                          onclick="{! c.onClickCancel }"/>
+        <lightning:button variant="brand" 
+                          label="Save"
+                          title="Save"
+                          onclick="{!c.createContract }"/>
+    </footer>                                                              
+    
+</aura:component>

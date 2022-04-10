@@ -1,0 +1,14 @@
+<aura:component implements='flexipage:availableForAllPageTypes'>
+    <aura:attribute name="productList" type="List" default="[{value:'Apple',label:'Apple'},
+                                                            {value:'Ball',label:'Ball'}]"></aura:attribute>    
+    
+    <lightning:card>
+        <lightning:select label='Select a product' onchange="{!c.onChangeHandler}">
+            <aura:iteration items="{!v.productList}" var="item">
+                <option text="{!item.label}" value="{!item.value}"></option>
+            </aura:iteration>
+        </lightning:select>
+    </lightning:card>
+    
+    <c:LightningAuraMethodChild aura:id="childComponents"></c:LightningAuraMethodChild>
+</aura:component>

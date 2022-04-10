@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasSObjectname">    
+    <aura:attribute name="fields" type="String" default="Name,Type,Phone"/>
+    <aura:attribute name="columns" type="List" default='[
+                                                        {label: "Name",
+                                                        fieldName: "Name",
+                                                        type:"text"
+                                                        },
+                                                        {
+                                                        label: "Type",
+                                                        fieldName: "Type",
+                                                        type:"text"
+                                                        },
+                                                        {
+                                                        label: "Phone",
+                                                        fieldName: "Phone",
+                                                        type:"phone"
+                                                        }
+                                                        ]'/>    
+    
+    <c:LightningDataTable columns="{!v.columns}" fields="{!v.fields}" objectName="{!v.sObjectName}"></c:LightningDataTable>
+</aura:component>

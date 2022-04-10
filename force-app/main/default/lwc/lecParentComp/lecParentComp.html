@@ -1,0 +1,9 @@
+<template>
+    <lightning-card>
+        <lightning-combobox label='Select a product' options={products} onchange={changehandle}>
+
+        </lightning-combobox>     
+        <c-lwcchildcomp aura:id='childComp' onfromchild={fromChildData}></c-lwcchildcomp> 
+        {fromC}          
+    </lightning-card>
+</template>

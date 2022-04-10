@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+
+    <aura:attribute name='searchValue' type='String' default=''></aura:attribute>'
+
+    <lightning:input name='Search Account' label='Search Accounts' value="{!v.searchValue}"></lightning:input>
+    <lightning:button name='Search' label='Search' onclick='{!c.searchForAccounts}'></lightning:button>
+
+</aura:component>

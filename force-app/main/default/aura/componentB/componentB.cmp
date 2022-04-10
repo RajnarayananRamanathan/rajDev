@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="dataValue" type='String'></aura:attribute>    
+    <aura:handler name="cmpEvent" 
+                  event="c:callEvent" 
+                  action="{!c.handleEvent}"/>
+    <lightning:card>
+        {!v.dataValue}
+    </lightning:card>   
+</aura:component>

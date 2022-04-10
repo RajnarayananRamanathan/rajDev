@@ -1,0 +1,10 @@
+<aura:component Controller="ComboBoxController">
+    <aura:attribute name="options" type="String[]"  default="[]"/>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:combobox name="progress" 
+                        label="MyComboBox" 
+                        value="new" 
+                        placeholder="Select Progress" 
+                        options="{!v.options}" 
+                        onchange="{! c.handleChange }"/>    
+</aura:component>

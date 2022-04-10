@@ -1,0 +1,4 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+    <aura:handler event="c:ApplicationEventTest" action="{!c.myAction}"></aura:handler>
+    <lightning:card></lightning:card>
+</aura:component>

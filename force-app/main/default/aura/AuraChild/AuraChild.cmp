@@ -1,0 +1,4 @@
+<aura:component >
+    <aura:registerEvent name='compEvent' type="c:AuraChildtoParent"></aura:registerEvent>
+    <lightning:button label="Click Me" onclick="{!c.myAction}"></lightning:button>
+</aura:component>
